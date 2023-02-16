@@ -29,24 +29,38 @@ function splitText() {
     const regexp = new RegExp(`.{1,${maxLen}}[。．！？.]`, 'g');
     const splitText = textInput.replace(/\n/g, ";").match(regexp);
     const output = document.getElementById("output");
+
     // 自動的に出力するtextareaを生成しtextareaにIDをふる
     output.innerHTML = "";
     splitText.forEach((text, index) => {
-        const textbox = document.createElement("textarea");
+        const div = document.createElement("div");
         const textareaId = `textarea${index}`;
-        textbox.id = textareaId;
-        textbox.type = "text";
-        textbox.value = text;
-        output.appendChild(textbox);
+        const textarea = document.createElement("textarea");
+        textarea.id = textareaId;
+        textarea.type = "text";
+        textarea.value = text;
+        div.appendChild(textarea);
 
         // コピーするボタンを作成
-        const button = document.createElement("button");
-        button.textContent = "コピー";
-        button.addEventListener("click", function () {
-            textbox.select();
+        const copyButton = document.createElement("button");
+        copyButton.textContent = "コピー";
+        copyButton.addEventListener("click", function () {
+            textarea.select();
             document.execCommand("copy");
         });
-        output.appendChild(button);
+        div.appendChild(copyButton);
+
+        // 翻訳するボタンを作成
+        const translateButton = document.createElement("button");
+        translateButton.textContent = "翻訳";
+        translateButton.addEventListener("click", function () {
+            const targetTextarea = document.getElementById(textareaId);
+            // 翻訳APIに渡す処理をここに記述
+            console.log(targetTextarea.value); // 例としてコンソールログにテキストを出力
+        });
+        div.appendChild(translateButton);
+
+        output.appendChild(div);
     });
 }
 
@@ -56,3 +70,4 @@ textInput.addEventListener("input", splitText);
 function clearInput() {
     document.getElementById("text-input").value = "";
 }
+

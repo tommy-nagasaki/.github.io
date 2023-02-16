@@ -16,7 +16,7 @@ function dropTextOrFile(event) {
         reader.onload = function () {
             textInput.value = reader.result;
         };
-    // 違ったら
+        // 違ったら
     } else {
         textInput.value = `ファイル名: ${data.name}\nタイプ: ${data.type}\nサイズ: ${data.size} bytes`;
     }
@@ -28,15 +28,15 @@ function splitText() {
     const maxLen = 5000;
     const regexp = new RegExp(`.{1,${maxLen}}[。．！？.]`, 'g');
     const splitText = textInput.replace(/\n/g, ";").match(regexp);
-    // split後のtextにあるセミコロンを改行にもどす変数の宣言
-    // const preoutput = textbox.replace(/\;/g, "\n").match(splitText);
     const output = document.getElementById("output");
-
+    // 自動的に出力するtextareaを生成しtextareaにIDをふる
     output.innerHTML = "";
-    splitText.forEach((text) => {
+    splitText.forEach((text, index) => {
         const textbox = document.createElement("textarea");
+        const textareaId = `textarea${index}`;
+        textbox.id = textareaId;
         textbox.type = "text";
-        textbox.value = text.replace(/\;/g, "\n"); 
+        textbox.value = text;
         output.appendChild(textbox);
 
         // コピーするボタンを作成

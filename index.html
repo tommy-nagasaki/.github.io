@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/select.css'>
+    <script src='js/select.js'></script>
+</head>
+
+<body>
+    <!-- 入力エリア開始 -->
+    <div id="input-area" class="input-area" ondragover="allowDrop(event)" ondrop="dropTextOrFile(event)">
+        <p>テキストを入力するかファイルをドロップしてください。</p>
+        <textarea id="text-input" class="text-input"></textarea>
+    </div>
+    <!-- 入力エリア終了 -->
+    
+    <button onclick="splitText()">分割</button>
+    <!-- テキスト消去ボタン -->
+    <button onclick="clearInput()">消去</button>
+    <!-- 分割結果を表示 -->
+    <div id="output"></div>
+</body>
+
+</html>

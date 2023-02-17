@@ -41,7 +41,7 @@ function splitText() {
         textarea.id = textareaId;
         // textareaの要素を定義
         textarea.type = "text";
-        textarea.value = text;
+        textarea.value = text.replace(/\;/g, "\n"); 
         div.appendChild(textarea);
 
         // コピーするボタンを作成

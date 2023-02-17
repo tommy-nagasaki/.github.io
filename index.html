@@ -11,13 +11,14 @@
 </head>
 
 <body>
+    <!-- 分割する文字数を入力 -->
+    <input id="max-length-input" type="number" min="1" max="10000" value="5000">
     <!-- 入力エリア開始 -->
     <div id="input-area" class="input-area" ondragover="allowDrop(event)" ondrop="dropTextOrFile(event)">
         <p>テキストを入力するかファイルをドロップしてください。</p>
         <textarea id="text-input" class="text-input"></textarea>
     </div>
     <!-- 入力エリア終了 -->
-    
     <button onclick="splitText()">分割</button>
     <!-- テキスト消去ボタン -->
     <button onclick="clearInput()">消去</button>

@@ -25,18 +25,21 @@ function dropTextOrFile(event) {
 // テキスト分割
 function splitText() {
     const textInput = document.getElementById("text-input").value;
-    const maxLen = 5000;
+    const maxLengthInput = document.getElementById("max-length-input");
+    const maxLen = parseInt(maxLengthInput.value, 10);
     const regexp = new RegExp(`.{1,${maxLen}}[。．！？.]`, 'g');
     const splitText = textInput.replace(/\n/g, ";").match(regexp);
     const output = document.getElementById("output");
 
-    // 自動的に出力するtextareaを生成しtextareaにIDをふる
+    // 自動的に出力するtextareaを生成する
     output.innerHTML = "";
     splitText.forEach((text, index) => {
         const div = document.createElement("div");
+        // textareaにIDをふる
         const textareaId = `textarea${index}`;
         const textarea = document.createElement("textarea");
         textarea.id = textareaId;
+        // textareaの要素を定義
         textarea.type = "text";
         textarea.value = text;
         div.appendChild(textarea);

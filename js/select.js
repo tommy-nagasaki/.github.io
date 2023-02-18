@@ -59,18 +59,36 @@ function splitText() {
         translateButton.addEventListener("click", function () {
             const targetTextarea = document.getElementById(textareaId);
             // 翻訳APIに渡す処理をここに記述
-            console.log(targetTextarea.value); // 例としてコンソールログにテキストを出力
+            const url = "https://us-central1-retranslation-58a15.cloudfunctions.net/helloWorld?q=" + targetTextarea.value; 
+            // 翻訳結果を表示
+            fetch(url)
+                .then((response) => response.text())
+                .then((data) => {
+                    // 自動的に出力するtextareaを生成する
+                    const outputTextarea = document.createElement("textarea");
+                    outputTextarea.value = data;
+                    output.appendChild(outputTextarea);
+                    // コピーするボタンを作成
+                    const div2 = document.createElement("div");
+                    const copyButton2 = document.createElement("button");
+                    copyButton2.textContent = "コピー";
+                    copyButton2.addEventListener("click", function () {
+                        outputTextarea.select();
+                        document.execCommand("copy");
+                    });
+                    div2.appendChild(copyButton2);
+                    output.appendChild(div2);
+                });
+            
         });
         div.appendChild(translateButton);
-
         output.appendChild(div);
     });
 }
 
-textInput.addEventListener("input", splitText);
+// textInput.addEventListener("input", splitText);これはなに？消すべきか？
 
 // 入力エリアをクリア
 function clearInput() {
     document.getElementById("text-input").value = "";
 }
-
